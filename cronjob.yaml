@@ -1,0 +1,15 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cron-jvq
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cron-jvq
+            image: gvqocsqlk8s
+            imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure

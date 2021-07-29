@@ -1,0 +1,39 @@
+PDO_OBJETIVOS_GVQ_HIST_VIEW
+DROP TABLE IF EXISTS [dbo].[pdoObjetivosGvqHistView];
+CREATE TABLE [dbo].[pdoObjetivosGvqHistView](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[PERIODO_ID] [datetime2](7) NOT NULL,
+	[SOCIEDAD_ID] [varchar](4) NOT NULL,
+	[SUBREGION_ID] [varchar](40) NOT NULL,
+	[JEFATURA_ID] [int] NOT NULL,
+	[JEFATURA] [varchar](30),
+	[ZONA_ID] [varchar](4),
+	[ZONA_DESC] [varchar](45),
+	[TERRITORIO_ID] [varchar](40),
+	[TERRITORIO_DESC] [varchar](45),
+	[TIPO_VENDEDOR_ID] [int] NOT NULL,
+	[TIPO_VENDEDOR_DESC] [varchar] (50),
+	[CATEGORIA_VENDEDOR_ID] [varchar] (3),
+	[CLIENTE_ID] [numeric](10) NOT NULL,
+	[PRODUCTO_ID] [numeric](10) NOT NULL,
+	[PRODUCTO_DESC] [varchar](50),
+	[FAMILIA_ID] [numeric] NOT NULL,
+	[FAMILIA] [varchar] (50),
+	[NEGOCIO_ID] [numeric](3) NOT NULL,
+	[NEGOCIO] [varchar] (45),
+	[HL_PRORRATEO] [numeric] NOT NULL,
+	[HL_SENSIBILIZACION] [numeric] NOT NULL,
+) ON [PRIMARY]
+GO
+
+
+PDO_OBJETIVOS_GVQ_HIST_VIEW_LOG
+DROP TABLE IF EXISTS [dbo].[pdoObjetivosGvqHistViewLog];
+CREATE TABLE [dbo].[pdoObjetivosGvqHistViewLog] (
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[execution_date] [datetime2](7) NOT NULL,
+	[success] [bit] NOT NULL,
+	[log] [varchar](255) NOT NULL,
+) ON [PRIMARY]
+GO
+
