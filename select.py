@@ -1,7 +1,7 @@
-from conexion import conexionsql
+from conexion_copy import conexionsql
 
 cursor = conexionsql.cursor()
-cursor.execute('SELECT * FROM Inventory')
+cursor.execute('SELECT * FROM api_response_log')
 
 myresult = cursor.fetchall()
 

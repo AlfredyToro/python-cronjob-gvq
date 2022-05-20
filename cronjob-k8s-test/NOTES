@@ -1,0 +1,148 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+    name: kubernetes-cron-job
+spec:
+  schedule: "0,15,30,45 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: cron-batch-job
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: kube-cron-job
+            image: devopscube/kubernetes-job-demo:latest
+            args: ["100"]
+
+kubectl apply -f cronjob.yaml
+
+
+apiVersion: batch/v1 
+kind: Job 
+metadata:   
+  name: kubernetes-job-example   
+  labels:     
+    jobgroup: jobexample 
+spec:   
+  template:     
+    metadata:       
+      name: kubejob       
+      labels:         
+        jobgroup: jobexample     
+    spec:       
+      containers:       
+      - name: c         
+        image: devopscube/kubernetes-job-demo:latest         
+        args: ["100"]       
+      restartPolicy: OnFailure
+
+
+consulta.sh
+#!/bin/bash
+
+#script de ejemplo
+
+
+
+FROM ubuntu:latest
+COPY script.sh /script.sh
+RUN chmod +x script.sh
+ENTRYPOINT ["/script.sh"]
+
+
+
+
+FROM python:latest
+
+WORKDIR /usr/local/bin
+
+COPY capturing.py .
+
+CMD ["capturing.py", "-OPTIONAL_FLAG"]
+
+//////////
+
+server.py
+
+from flask import Flask
+server = Flask(__name__)
+
+@server.route("/")
+ def hello():
+    return "Hello World!"
+
+if __name__ == "__main__":
+   server.run(host='0.0.0.0')
+
+   -------------
+
+   requirements.txt
+
+Flask==1.1.1
+
+----------
+
+app
+├─── requirements.txt
+└─── src
+     └─── server.py
+-----------
+
+# set base image (host OS)
+FROM python:3.8
+
+# set the working directory in the container
+WORKDIR /code
+
+# copy the dependencies file to the working directory
+COPY requirements.txt .
+
+# install dependencies
+RUN pip install -r requirements.txt
+
+# copy the content of the local src directory to the working directory
+COPY src/ .
+
+# command to run on container start
+CMD [ "python", "./server.py" ]
+
+-----------------
+
+docker build
+
+---------
+
+/////////////
+
+Code for hello.py:
+
+print ("Hello World")
+Code for a.py:
+
+print ("Overriden Hello")
+
+----------
+
+FROM ubuntu
+MAINTAINER Prashansa Kulshrestha
+RUN apt-get update
+RUN apt-get install -y python
+ADD hello.py /home/hello.py
+ADD a.py /home/a.py
+CMD ["/home/hello.py"]
+ENTRYPOINT ["python"]
+
+----
+docker build -t pythonimage .
+
+---------
+
+FROM python:3
+WORKDIR /usr/src/app
+COPY hellosincmd.py .
+CMD ["hellosincmd.py"]
+ENTRYPOINT ["python3"]
+

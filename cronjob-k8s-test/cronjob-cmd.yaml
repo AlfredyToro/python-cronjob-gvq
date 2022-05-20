@@ -1,0 +1,15 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: simplecmd
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: simplecmd
+            image: docker.io/atoro77/python3:simplecmd
+            imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dockerhub-k8s
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dockerhub-k8s
+  template:
+    metadata:
+      labels:
+        app: dockerhub-k8s
+    spec:
+      containers:
+      - name: dockerhub-k8s
+        image: docker.io/atoro77/python3:dockerhub
+        imagePullPolicy: Always
+      restartPolicy: Always
